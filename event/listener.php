@@ -39,7 +39,7 @@ class listener implements EventSubscriberInterface
 	 *
 	 * @return array
 	 */
-	public static function getSubscribedEvents()
+	static public function getSubscribedEvents()
 	{
 		return [
 			'core.user_setup'			=> 'load_language_on_setup',
@@ -62,7 +62,8 @@ class listener implements EventSubscriberInterface
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
-	public function page_header_after($event) {
+	public function page_header_after($event)
+	{
 		$this->template->assign_var('S_RBB_IS_ABBC3', $this->phpbb_extension_manager->is_enabled('vse/abbc3'));
 	}
 }
