@@ -1,9 +1,13 @@
 /* Spaces */
-#format-buttons .bbcode-quote,
 #format-buttons .bbcode-img,
-#format-buttons .bbcode-color,
-#format-buttons .bbcode-file {
+#format-buttons .bbcode-color {
 	margin-left: 10px;
+}
+
+#format-buttons .bbcode-u,
+#format-buttons .bbcode-file,
+#format-buttons .bbcode-size {
+	margin-right: 10px;
 }
 
 /* Font colour */
@@ -21,7 +25,7 @@
 .color-picker-wrap .color-picker{display:none;}
 
 /* Font size */
-select.bbcode-size {
+select.bbcode-size, select[name="abbc3_addbbcode20"] {
 	display: none;
 }
 

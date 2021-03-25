@@ -620,7 +620,7 @@ function mozWrap(txtarea, open, close) {
 }
 
 // Font size button
-$(document).on('click', '#format-buttons .bbcode-size a[data-size]', function(e) {
+$(document).on('click', '#format-buttons .bbcode-size a[data-size], #abbc3_buttons .bbcode-size a[data-size]', function(e) {
 	e.preventDefault();
 
 	bbfontstyle('[size=' + $(this).attr('data-size') + ']', '[/size]');
@@ -629,7 +629,7 @@ $(document).on('click', '#format-buttons .bbcode-size a[data-size]', function(e)
 });
 
 // Font size button
-$(document).on('click', '#format-buttons .bbcode-file', function(e) {
+$(document).on('click', '#format-buttons .bbcode-file, #abbc3_buttons .bbcode-file', function(e) {
 	e.preventDefault();
 
 	$(document).find('#tabs a[data-subpanel="attach-panel"]').click();
