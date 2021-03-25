@@ -1,3 +1,35 @@
-<!-- IF S_BBCODE_ALLOWED -->
-	<!-- INCLUDEJS @tatiana5_reformedbbcodes/reformedbbcodes.js -->
-<!-- ENDIF -->
+{% if S_BBCODE_ALLOWED %}
+	<script>
+		var rbbLang = {
+			img: '{{ lang("RBB_IMG")|addslashes }}',
+			url: '{{ lang("RBB_URL")|addslashes }}',
+			urlText: '{{ lang("RBB_URL_TEXT")|addslashes }}',
+			media: '{{ lang("RBB_MEDIA")|addslashes }}',
+			spoilerText: '{{ lang("RBB_SPOILER_TEXT")|addslashes }}',
+			quoteAuthor: '{{ lang("RBB_QUOTE_AUTHOR")|addslashes }}',
+			listMarker: '{{ lang("RBB_LIST_MARKER")|addslashes }}',
+			flashSize: '{{ lang("RBB_FLASH_SIZE")|addslashes }}',
+			//
+			black: '{{ lang("RBB_BLACK")|addslashes }}',
+			white: '{{ lang("RBB_WHITE")|addslashes }}',
+			red: '{{ lang("RBB_RED")|addslashes }}',
+			green: '{{ lang("RBB_GREEN")|addslashes }}',
+			blue: '{{ lang("RBB_BLUE")|addslashes }}',
+			teal: '{{ lang("RBB_TEAL")|addslashes }}',
+			grey: '{{ lang("RBB_GREY")|addslashes }}',
+			orange: '{{ lang("RBB_ORANGE")|addslashes }}',
+			yellow: '{{ lang("RBB_YELLOW")|addslashes }}',
+			pink: '{{ lang("RBB_PINK")|addslashes }}',
+			purple: '{{ lang("RBB_PURPLE")|addslashes }}',
+			customColor: '{{ lang("RBB_CUSTOM_COLOR")|addslashes }}',
+			addNew: '{{ lang("RBB_ADD_NEW")|addslashes }}'
+		};
+
+		var rbbSettings = {
+			abbc3: {% if S_RBB_IS_ABBC3 %}true{% else %}false{% endif %}
+		};
+	</script>
+	
+	
+	{% INCLUDEJS '@tatiana5_reformedbbcodes/reformedbbcodes.js' %}
+{% endif %}

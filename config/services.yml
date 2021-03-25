@@ -1,0 +1,8 @@
+services:
+    tatiana5.reformedbbcodes.listener:
+        class: tatiana5\reformedbbcodes\event\listener
+        arguments:
+            - '@template'
+            - '@ext.manager'
+        tags:
+            - { name: event.listener }

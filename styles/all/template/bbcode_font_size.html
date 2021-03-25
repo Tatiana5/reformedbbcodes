@@ -1,0 +1,23 @@
+<button type="button" class="button button-icon-only bbcode-size" accesskey="f" name="addbbcode20" value="fontsize">
+	<div class="dropdown-container dropdown-right">
+		<a href="#" class="dropdown-trigger">
+			<i aria-hidden="true" class="icon fa-text-height fa-fw" title="{L_BBCODE_F_HELP}"></i>
+		</a>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents">
+					<li><a href="#" data-size="70">{L_FONT_TINY}</a></li>
+					<li><a href="#" data-size="85">{L_FONT_SMALL}</a></li>
+					<li><a href="#" data-size="100">{L_FONT_NORMAL}</a></li>
+					<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 115 -->
+						<li><a href="#" data-size="115">{L_FONT_LARGE}</a></li>
+						<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 130 -->
+							<li><a href="#" data-size="130">{L_FONT_HUGE}</a></li>
+						<!-- ENDIF -->
+					<!-- ENDIF -->
+				</ul>
+		</div>
+	</div>
+	<a href="#" data-size="+"><i aria-hidden="true" class="icon fa-chevron-up fa-fw"></i></a>
+	<a href="#" data-size="-"><i aria-hidden="true" class="icon fa-chevron-down fa-fw"></i></a>
+</button>
