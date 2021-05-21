@@ -30,8 +30,22 @@
 		};
 
 		{% if S_QR_SHOW_ATTACH_BOX %}
+			var qr_attach_visible = qr_attach_notice_visible = true;
+			
 			$(document).ready(function() {
 				$('#attach-panel').hide();
+			});
+
+			$('#qr_postform').on('qr_set_extended_before', function(){
+				qr_attach_visible = ($('#attach-panel').css('display') != 'none');
+				qr_attach_notice_visible = ($('#qr_attach_notice').css('display') != 'none');
+			});
+
+			$('#qr_postform').on('qr_set_extended_after', function(){
+				if (!qr_attach_visible && !qr_attach_notice_visible) {
+					$('#attach-panel').hide();
+					qr_attach_visible = qr_attach_notice_visible = true;
+				}
 			});
 		{% endif %}
 	</script>
