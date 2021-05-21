@@ -628,10 +628,80 @@ $(document).on('click', '#format-buttons .bbcode-size a[data-size], #abbc3_butto
 	$(this).parents('.dropdown-container').find('.dropdown-trigger').click();
 });
 
-// Font size button
+// File button
 $(document).on('click', '#format-buttons .bbcode-file, #abbc3_buttons .bbcode-file', function(e) {
 	e.preventDefault();
 
 	$(document).find('#tabs a[data-subpanel="attach-panel"]').click();
 	$(document).find('#add_files').click();
 });
+
+$(document).ready(function() {
+	new IntersectionObserver(
+		([e]) => e.target.toggleAttribute('stuck', e.intersectionRatio < 1),
+		{threshold: [1]}
+	).observe(document.querySelector('.format-buttons'));
+});
+
+
+
+var rbb_scroll_flag = false;
+
+$(window).scroll(function() {
+	rbb_scroll_flag = true;
+});
+
+$('#message').scroll(function() {
+	rbb_scroll_flag = true;
+});
+
+$(window).resize(function () {
+	rbb_scroll_flag = true;
+});
+
+$(document).on('focus keydown', '#message', function() {
+	if (rbb_scroll_flag) {
+		var $rbb_txtarea = $('<textarea>')
+							.css('postion', 'absolute')
+							.css('top', '-9999px')
+							.css('height', '1px')
+							.css('width', $('#message').width())
+							.css('font-size', $('#message').css('font-size'))
+							.css('line-height', $('#message').css('line-height'))
+							.css('border', $('#message').css('border'))
+							.css('padding', $('#message').css('padding'))
+							.attr('class', 'rbb_txtarea')
+							.val($('#message')[0].value.slice(0, $('#message')[0].selectionEnd));
+
+		$('#message').after($rbb_txtarea);
+		var rbb_text_height = Math.max($rbb_txtarea[0].scrollHeight - parseInt($('#message').css('line-height')) - 3, 0),
+			rbb_message_offset = $('#message').offset().top
+			rbb_page_offset = window.pageYOffset;
+
+		if (Math.abs($('#message')[0].scrollHeight - $('#message').innerHeight()) > Number.EPSILON) {
+			if (rbb_text_height > $('#message')[0].scrollTop) {
+				rbb_text_height -= $('#message')[0].scrollTop;
+			} else {
+				$('#message')[0].scrollTop = rbb_text_height;
+				rbb_text_height = 0;
+			}
+		}
+
+
+		if ((rbb_message_offset - rbb_page_offset) < parseInt($('#format-buttons').outerHeight())) {
+			rbb_page_offset += Math.min(Math.abs(rbb_message_offset - rbb_page_offset), parseInt($('#format-buttons').outerHeight()));
+		}
+
+		//rbb_message_offset -= parseInt($('#message').css('padding-bottom'));
+		rbb_message_offset += rbb_text_height;
+				
+		//console.log('answer = ' + (rbb_message_offset - rbb_page_offset));
+		if ((rbb_message_offset - rbb_page_offset) < 0) {
+			window.scrollBy(0, (rbb_message_offset - rbb_page_offset));
+		}
+
+		$('.rbb_txtarea').remove();
+		rbb_scroll_flag = false;
+	}
+});
+

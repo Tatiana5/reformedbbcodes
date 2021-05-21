@@ -1,3 +1,17 @@
+#format-buttons {
+	position: sticky;
+	top: -1px; /* For IntersectionObserver */
+	z-index: 1;
+	background: #ecf1f3;
+	padding: 2px 0 4px;
+	margin: 5px 0 0;
+	line-height: 28px;
+}
+
+#format-buttons[stuck] {
+	box-shadow: 0 5px 3px -4px #0000004a;
+}
+
 /* Spaces */
 #format-buttons .bbcode-img,
 #format-buttons .bbcode-color {

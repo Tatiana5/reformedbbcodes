@@ -28,6 +28,12 @@
 		var rbbSettings = {
 			abbc3: {% if S_RBB_IS_ABBC3 %}true{% else %}false{% endif %}
 		};
+
+		{% if S_QR_SHOW_ATTACH_BOX %}
+			$(document).ready(function() {
+				$('#attach-panel').hide();
+			});
+		{% endif %}
 	</script>
 	
 	
