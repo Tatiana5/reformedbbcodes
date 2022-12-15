@@ -47,6 +47,12 @@
 					qr_attach_visible = qr_attach_notice_visible = true;
 				}
 			});
+
+			if (quickreply.settings.formType === 0) {
+				$(document).on('click', '#format-buttons .bbcode-file, #abbc3_buttons .bbcode-file', function(e) {
+					$(document).find('#attach-panel').show();
+				});
+			}
 		{% endif %}
 	</script>
 	
