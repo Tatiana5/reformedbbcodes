@@ -2,6 +2,7 @@ services:
     tatiana5.reformedbbcodes.listener:
         class: tatiana5\reformedbbcodes\event\listener
         arguments:
+            - '@config'
             - '@template'
             - '@ext.manager'
         tags:

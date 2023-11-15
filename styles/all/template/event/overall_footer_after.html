@@ -54,6 +54,14 @@
 				});
 			}
 		{% endif %}
+
+		{% if S_QR_SHOW_ATTACH_BOX or (S_SHOW_ATTACH_BOX and FILTERS) %}
+			$('.submit-buttons input.button1').click(function() {
+				if ($('#message').val().length < {{ RBB_MIN_POST_CHARS }}) {
+					$('#attach-panel').find('.file-inline-bbcode').first().click();
+				}
+			});
+		{% endif %}
 	</script>
 	
 	

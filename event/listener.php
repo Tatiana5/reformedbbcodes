@@ -16,6 +16,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class listener implements EventSubscriberInterface
 {
+	/** @var \phpbb\config\config */
+	protected $config;
+
 	/** @var \phpbb\template\template */
 	protected $template;
 
@@ -26,10 +29,12 @@ class listener implements EventSubscriberInterface
 	 * Constructor
 	 *
 	 */
-	public function __construct(\phpbb\template\template $template,
+	public function __construct(\phpbb\config\config $config,
+								\phpbb\template\template $template,
 								\phpbb\extension\manager $phpbb_extension_manager
 								)
 	{
+		$this->config = $config;
 		$this->template = $template;
 		$this->phpbb_extension_manager = $phpbb_extension_manager;
 	}
@@ -64,6 +69,9 @@ class listener implements EventSubscriberInterface
 
 	public function page_header_after($event)
 	{
-		$this->template->assign_var('S_RBB_IS_ABBC3', $this->phpbb_extension_manager->is_enabled('vse/abbc3'));
+		$this->template->assign_vars([
+			'S_RBB_IS_ABBC3'		=>	$this->phpbb_extension_manager->is_enabled('vse/abbc3'),
+			'RBB_MIN_POST_CHARS'	=>	(int) $this->config['min_post_chars']
+		]);
 	}
 }
