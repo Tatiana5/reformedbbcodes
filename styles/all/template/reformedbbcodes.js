@@ -636,11 +636,16 @@ $(document).on('click', '#format-buttons .bbcode-file, #abbc3_buttons .bbcode-fi
 	$(document).find('#add_files').click();
 });
 
+var rbb_bbcode_panel = '.format-buttons';
 $(document).ready(function() {
+	if ($('#abbc3_buttons').length) {
+		rbb_bbcode_panel = '#abbc3_buttons';
+	}
+	
 	new IntersectionObserver(
 		([e]) => e.target.toggleAttribute('stuck', e.intersectionRatio < 1),
 		{threshold: [1]}
-	).observe(document.querySelector('.format-buttons'));
+	).observe(document.querySelector(rbb_bbcode_panel));
 });
 
 
@@ -651,7 +656,11 @@ $(window).scroll(function() {
 	rbb_scroll_flag = true;
 });
 
+var rbb_message_offset_fix;
 $('#message').scroll(function() {
+	/* Fix for google chrome */
+	rbb_message_offset_fix = $('#message').scrollTop();
+
 	rbb_scroll_flag = true;
 });
 
@@ -674,6 +683,7 @@ $(document).on('focus keydown', '#message', function() {
 							.val($('#message')[0].value.slice(0, $('#message')[0].selectionEnd));
 
 		$('#message').after($rbb_txtarea);
+
 		var rbb_text_height = Math.max($rbb_txtarea[0].scrollHeight - parseInt($('#message').css('line-height')) - 3, 0),
 			rbb_message_offset = $('#message').offset().top
 			rbb_page_offset = window.pageYOffset;
@@ -688,8 +698,8 @@ $(document).on('focus keydown', '#message', function() {
 		}
 
 
-		if ((rbb_message_offset - rbb_page_offset) < parseInt($('#format-buttons').outerHeight())) {
-			rbb_page_offset += Math.min(Math.abs(rbb_message_offset - rbb_page_offset), parseInt($('#format-buttons').outerHeight()));
+		if ((rbb_message_offset - rbb_page_offset) < parseInt($(rbb_bbcode_panel).outerHeight())) {
+			rbb_page_offset += Math.min(Math.abs(rbb_message_offset - rbb_page_offset), parseInt($(rbb_bbcode_panel).outerHeight()));
 		}
 
 		//rbb_message_offset -= parseInt($('#message').css('padding-bottom'));
@@ -702,6 +712,9 @@ $(document).on('focus keydown', '#message', function() {
 
 		$('.rbb_txtarea').remove();
 		rbb_scroll_flag = false;
+		
+		/* Fix for google chrome */
+		$('#message').scrollTop(rbb_message_offset_fix);
 	}
 });
 
