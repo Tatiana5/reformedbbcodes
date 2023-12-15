@@ -11,6 +11,11 @@
 #abbc3_buttons {
 	margin: 15px 0 0 !important;
 	padding: 0 0 2px !important;
+	width: 80% !important;
+}
+
+.abbc3_buttons_row {
+	width: 100% !important;
 }
 
 #format-buttons[stuck], #abbc3_buttons[stuck] {
