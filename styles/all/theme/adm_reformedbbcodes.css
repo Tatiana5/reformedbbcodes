@@ -150,6 +150,10 @@ button {
 	color: #0A8ED0;
 }
 
+.abbc3_button[name="abbc3_bbpalette"] {
+	display: none;
+}
+
 /* Color picker */
 .color-picker-wrap.cp-lg a, .color-picker-wrap.cp-lg span {
 	width: 69px;

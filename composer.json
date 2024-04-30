@@ -3,7 +3,7 @@
 	"type": "phpbb-extension",
 	"description": "",
 	"homepage": "https://www.phpbbguru.net/community",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"time": "2018-10-22",
 	"license": "GPL-2.0-only",
     "authors": [
@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=7.0.0"
     },
    "require-dev": {
       "phpbb/epv": "dev-master"
@@ -22,7 +22,7 @@
    "extra": {
         "display-name": "Reformed bbcodes",
         "soft-require": {
-           "phpbb/phpbb": ">=3.1.4-RC1"
+           "phpbb/phpbb": ">=3.2.0"
         }
     }
 }

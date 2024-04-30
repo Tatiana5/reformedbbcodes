@@ -718,3 +718,74 @@ $(document).on('focus keydown', '#message', function() {
 	}
 });
 
+$(document).ready(function() {
+
+var rb_files = [];
+
+if (rbbSettings.clipboardimage) {
+	
+	var clipboardimage = false;
+	var rbbImages = [];
+	
+	$(window).on('paste', function(e) {
+		var rbbClipboardData = e.originalEvent.clipboardData || window.clipboardData;
+		if (rbbClipboardData === false || rbbClipboardData.items == false) {
+			return;
+		}
+		rbbText = String(rbbClipboardData.getData('text'));
+
+		// test whether there is a mix of text and rbbImages in the clipboard
+		// along the way, store data into variables for further use even
+		// when user flushes the clipboard
+		rbbImages = [];
+		$.each(rbbClipboardData.items, function(_, item) {
+			if (item.type.indexOf('image') != -1) {
+				rbbImages.push(item.getAsFile());
+			}
+		});
+
+		// don't paste text when we have to decide what to do
+		if (rbbText.length && rbbImages.length) {
+			clipboardimage = false;
+		}
+
+		// no text - just upload rbbImages
+		if (!rbbText.length) {
+			clipboardimage = true;
+		}
+	
+		// no image but some text here - let the browser do its job
+	});
+}
+
+phpbb.plupload.uploader.bind('FilesAdded', function(_, files) {
+	if (files.length == 1) {
+		rb_files = files;
+	} else {
+		rb_files = [];
+	}
+});
+
+// place new image inline
+phpbb.plupload.uploader.bind('FileUploaded', function(_, file, response) {
+	if (rbbSettings.clipboardimage) {
+		var rbbClipboardImg = rbbImages.find(function(img) {
+			return img.name == file.name && img.size == file.origSize;
+		});
+			
+		if (rbbClipboardImg) {
+			rb_files = [];
+		}
+	}
+
+	if (rb_files.length == 1) {
+		try {
+			var json = JSON.parse(response.response);
+			if (typeof json.title === 'undefined' && !json.error && file.status === plupload.DONE) {
+				attachInline(phpbb.plupload.getIndex(json.data[0].attach_id), json.data[0].real_filename);
+			}
+		} catch (e) {console.log(e)}
+	}
+});
+
+});

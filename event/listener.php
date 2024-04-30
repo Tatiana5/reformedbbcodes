@@ -70,8 +70,9 @@ class listener implements EventSubscriberInterface
 	public function page_header_after($event)
 	{
 		$this->template->assign_vars([
-			'S_RBB_IS_ABBC3'		=>	$this->phpbb_extension_manager->is_enabled('vse/abbc3'),
-			'RBB_MIN_POST_CHARS'	=>	(int) $this->config['min_post_chars']
+			'S_RBB_IS_ABBC3'				=>	$this->phpbb_extension_manager->is_enabled('vse/abbc3'),
+			'S_RBB_IS_CLIPBOARDIMAGE'		=>	$this->phpbb_extension_manager->is_enabled('senky/clipboardimage'),
+			'RBB_MIN_POST_CHARS'			=>	(int) $this->config['min_post_chars']
 		]);
 	}
 }
